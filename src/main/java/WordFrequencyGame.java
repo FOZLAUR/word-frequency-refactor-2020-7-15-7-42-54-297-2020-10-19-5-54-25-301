@@ -20,12 +20,7 @@ public class WordFrequencyGame {
                 //get the map for the next step of sizing the same word
                 Map<String, List<WordInfo>> wordMap = getListMap(words);
 
-                List<WordInfo> list = new ArrayList<>();
-                for (Map.Entry<String, List<WordInfo>> entry : wordMap.entrySet()){
-                    WordInfo input = new WordInfo(entry.getKey(), entry.getValue().size());
-                    list.add(input);
-                }
-                words = list;
+                words = getUniqueWordInfos(wordMap);
 
                 words.sort((w1, w2) -> w2.getQuantity() - w1.getQuantity());
 
@@ -37,6 +32,15 @@ public class WordFrequencyGame {
                 return "Calculate Error";
             }
         }
+    }
+
+    private List<WordInfo> getUniqueWordInfos(Map<String, List<WordInfo>> wordMap) {
+        List<WordInfo> list = new ArrayList<>();
+        for (Map.Entry<String, List<WordInfo>> entry : wordMap.entrySet()){
+            WordInfo input = new WordInfo(entry.getKey(), entry.getValue().size());
+            list.add(input);
+        }
+        return list;
     }
 
     private String getConjoinedString(List<WordInfo> words) {
