@@ -2,24 +2,15 @@ import java.util.*;
 
 public class WordFrequencyGame {
     public String getResult(String sentence){
-
-        if (sentence.split("\\s+").length==1) {
-            return sentence + " 1";
-        } else {
-
-            try {
-                //split the input string with 1 to n pieces of spaces
-                List<String> unfilteredWords = getWords(sentence);
-
-                List<WordInfo> distinctWords = getDistinctWordInfos(unfilteredWords);
-
-                distinctWords.sort((w1, w2) -> w2.getQuantity() - w1.getQuantity());
-
-                String conjoinedString = getConjoinedString(distinctWords);
-                return conjoinedString;
-            } catch (Exception e) {
-                return "Calculate Error";
-            }
+        try {
+            //split the input string with 1 to n pieces of spaces
+            List<String> unfilteredWords = getWords(sentence);
+            List<WordInfo> distinctWords = getDistinctWordInfos(unfilteredWords);
+            distinctWords.sort((w1, w2) -> w2.getQuantity() - w1.getQuantity());
+            String conjoinedString = getConjoinedString(distinctWords);
+            return conjoinedString;
+        } catch (Exception e) {
+            return "Calculate Error";
         }
     }
 
@@ -36,10 +27,7 @@ public class WordFrequencyGame {
 
     private String getConjoinedString(List<WordInfo> words) {
         StringJoiner joiner = new StringJoiner("\n");
-        for (WordInfo wordInfo : words) {
-            String wordInfoLine = String.format("%s %d",wordInfo.getWord(),wordInfo.getQuantity());
-            joiner.add(wordInfoLine);
-        }
+        words.stream().forEach(wordInfo -> joiner.add(String.format("%s %d",wordInfo.getWord(),wordInfo.getQuantity())));
         return joiner.toString();
     }
 
