@@ -17,11 +17,10 @@ public class WordFrequencyGame {
     private List<WordInfo> getDistinctWordInfos(List<String> unfilteredWords) {
         List<WordInfo> distinctWordInfoList = new ArrayList<>();
         HashSet<String> distinctWords = new HashSet<>(unfilteredWords);
-        for (String word : distinctWords){
-            WordInfo input = new WordInfo(word,
-                    Collections.frequency(unfilteredWords, word) );
-            distinctWordInfoList.add(input);
-        }
+        distinctWords
+                .stream()
+                .forEach(word -> distinctWordInfoList.add(new WordInfo(word,
+                        Collections.frequency(unfilteredWords, word) )));
         return distinctWordInfoList;
     }
 
