@@ -11,13 +11,13 @@ public class WordFrequencyGame {
             try {
 
                 //split the input string with 1 to n pieces of spaces
-                List<String> words = getWords(sentence);
+                List<String> unfilteredWords = getWords(sentence);
 
                 //get the map for the next step of sizing the same word
                 //Map<String, List<WordInfo>> wordMap = getListMap(words);
 
                 //words = getUniqueWordInfos(wordMap);
-                List<WordInfo> distinctWords = getUniqueWordInfos(words);
+                List<WordInfo> distinctWords = getUniqueWordInfos(unfilteredWords);
 
                 distinctWords.sort((w1, w2) -> w2.getQuantity() - w1.getQuantity());
 
@@ -31,12 +31,12 @@ public class WordFrequencyGame {
         }
     }
 
-    private List<WordInfo> getUniqueWordInfos(List<String> words) {
+    private List<WordInfo> getUniqueWordInfos(List<String> unfilteredWords) {
         List<WordInfo> distinctWordInfoList = new ArrayList<>();
-        HashSet<String> distinctWords = new HashSet<>(words);
+        HashSet<String> distinctWords = new HashSet<>(unfilteredWords);
         for (String word : distinctWords){
             WordInfo input = new WordInfo(word,
-                    Collections.frequency(words, word) );
+                    Collections.frequency(unfilteredWords, word) );
             distinctWordInfoList.add(input);
         }
         return distinctWordInfoList;
