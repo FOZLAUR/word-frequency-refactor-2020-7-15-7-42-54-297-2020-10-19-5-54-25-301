@@ -8,7 +8,6 @@ public class WordFrequencyGame {
         } else {
 
             try {
-
                 //split the input string with 1 to n pieces of spaces
                 List<String> unfilteredWords = getWords(sentence);
 
@@ -19,8 +18,6 @@ public class WordFrequencyGame {
                 String conjoinedString = getConjoinedString(distinctWords);
                 return conjoinedString;
             } catch (Exception e) {
-
-
                 return "Calculate Error";
             }
         }
@@ -40,7 +37,7 @@ public class WordFrequencyGame {
     private String getConjoinedString(List<WordInfo> words) {
         StringJoiner joiner = new StringJoiner("\n");
         for (WordInfo wordInfo : words) {
-            String wordInfoLine = wordInfo.getWord() + " " +wordInfo.getQuantity();
+            String wordInfoLine = String.format("%s %d",wordInfo.getWord(),wordInfo.getQuantity());
             joiner.add(wordInfoLine);
         }
         return joiner.toString();
