@@ -17,7 +17,7 @@ public class WordFrequencyGame {
                 //Map<String, List<WordInfo>> wordMap = getListMap(words);
 
                 //words = getUniqueWordInfos(wordMap);
-                List<WordInfo> distinctWords = getUniqueWordInfos(unfilteredWords);
+                List<WordInfo> distinctWords = getDistinctWordInfos(unfilteredWords);
 
                 distinctWords.sort((w1, w2) -> w2.getQuantity() - w1.getQuantity());
 
@@ -31,7 +31,7 @@ public class WordFrequencyGame {
         }
     }
 
-    private List<WordInfo> getUniqueWordInfos(List<String> unfilteredWords) {
+    private List<WordInfo> getDistinctWordInfos(List<String> unfilteredWords) {
         List<WordInfo> distinctWordInfoList = new ArrayList<>();
         HashSet<String> distinctWords = new HashSet<>(unfilteredWords);
         for (String word : distinctWords){
