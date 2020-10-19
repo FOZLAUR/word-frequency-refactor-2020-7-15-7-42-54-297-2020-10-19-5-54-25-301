@@ -30,8 +30,8 @@ public class WordFrequencyGame {
                 words.sort((w1, w2) -> w2.getQuantity() - w1.getQuantity());
 
                 StringJoiner joiner = new StringJoiner("\n");
-                for (WordInfo w : words) {
-                    String s = w.getWord() + " " +w.getQuantity();
+                for (WordInfo wordInfo : words) {
+                    String s = wordInfo.getWord() + " " +wordInfo.getQuantity();
                     joiner.add(s);
                 }
                 return joiner.toString();
