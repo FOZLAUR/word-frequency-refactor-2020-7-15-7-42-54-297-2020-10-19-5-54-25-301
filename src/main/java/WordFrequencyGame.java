@@ -11,17 +11,17 @@ public class WordFrequencyGame {
             try {
 
                 //split the input string with 1 to n pieces of spaces
-                List<WordInfo> words = getWords(sentence);
+                List<String> words = getWords(sentence);
 
                 //get the map for the next step of sizing the same word
-                Map<String, List<WordInfo>> wordMap = getListMap(words);
+                //Map<String, List<WordInfo>> wordMap = getListMap(words);
 
                 //words = getUniqueWordInfos(wordMap);
-                words = getUniqueWordInfos(words);
+                List<WordInfo> distinctWords = getUniqueWordInfos(words);
 
-                words.sort((w1, w2) -> w2.getQuantity() - w1.getQuantity());
+                distinctWords.sort((w1, w2) -> w2.getQuantity() - w1.getQuantity());
 
-                String conjoinedString = getConjoinedString(words);
+                String conjoinedString = getConjoinedString(distinctWords);
                 return conjoinedString;
             } catch (Exception e) {
 
@@ -31,12 +31,12 @@ public class WordFrequencyGame {
         }
     }
 
-    private List<WordInfo> getUniqueWordInfos(List<WordInfo> words) {
+    private List<WordInfo> getUniqueWordInfos(List<String> words) {
         List<WordInfo> distinctWordInfoList = new ArrayList<>();
-        HashSet<WordInfo> distinctWords = new HashSet<>(words);
-        for (WordInfo wordInfo : distinctWords){
-            WordInfo input = new WordInfo(wordInfo.getWord(),
-                    Collections.frequency(words, new WordInfo(wordInfo.getWord(),0)) );
+        HashSet<String> distinctWords = new HashSet<>(words);
+        for (String word : distinctWords){
+            WordInfo input = new WordInfo(word,
+                    Collections.frequency(words, word) );
             distinctWordInfoList.add(input);
         }
         return distinctWordInfoList;
@@ -60,17 +60,20 @@ public class WordFrequencyGame {
         return joiner.toString();
     }
 
-    private List<WordInfo> getWords(String sentence) {
-        String[] wordsArray = sentence.split("\\s+");
+//    private List<WordInfo> getWords(String sentence) {
+//        String[] wordsArray = sentence.split("\\s+");
+//
+//        List<WordInfo> words = new ArrayList<>();
+//        for (String word : wordsArray) {
+//            WordInfo wordInfo = new WordInfo(word, 1);
+//            words.add(wordInfo);
+//        }
+//        return words;
+//    }
 
-        List<WordInfo> words = new ArrayList<>();
-        for (String word : wordsArray) {
-            WordInfo wordInfo = new WordInfo(word, 1);
-            words.add(wordInfo);
-        }
-        return words;
+    private List<String> getWords(String sentence) {
+        return Arrays.asList(sentence.split("\\s+"));
     }
-
 
     private Map<String,List<WordInfo>> getListMap(List<WordInfo> words) {
         Map<String, List<WordInfo>> wordMap = new HashMap<>();
