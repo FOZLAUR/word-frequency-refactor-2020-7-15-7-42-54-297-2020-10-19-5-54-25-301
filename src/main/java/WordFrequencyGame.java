@@ -13,10 +13,6 @@ public class WordFrequencyGame {
                 //split the input string with 1 to n pieces of spaces
                 List<String> unfilteredWords = getWords(sentence);
 
-                //get the map for the next step of sizing the same word
-                //Map<String, List<WordInfo>> wordMap = getListMap(words);
-
-                //words = getUniqueWordInfos(wordMap);
                 List<WordInfo> distinctWords = getDistinctWordInfos(unfilteredWords);
 
                 distinctWords.sort((w1, w2) -> w2.getQuantity() - w1.getQuantity());
@@ -42,15 +38,6 @@ public class WordFrequencyGame {
         return distinctWordInfoList;
     }
 
-//    private List<WordInfo> getUniqueWordInfos(Map<String, List<WordInfo>> wordMap) {
-//        List<WordInfo> list = new ArrayList<>();
-//        for (Map.Entry<String, List<WordInfo>> entry : wordMap.entrySet()){
-//            WordInfo input = new WordInfo(entry.getKey(), entry.getValue().size());
-//            list.add(input);
-//        }
-//        return list;
-//    }
-
     private String getConjoinedString(List<WordInfo> words) {
         StringJoiner joiner = new StringJoiner("\n");
         for (WordInfo wordInfo : words) {
@@ -60,25 +47,13 @@ public class WordFrequencyGame {
         return joiner.toString();
     }
 
-//    private List<WordInfo> getWords(String sentence) {
-//        String[] wordsArray = sentence.split("\\s+");
-//
-//        List<WordInfo> words = new ArrayList<>();
-//        for (String word : wordsArray) {
-//            WordInfo wordInfo = new WordInfo(word, 1);
-//            words.add(wordInfo);
-//        }
-//        return words;
-//    }
-
     private List<String> getWords(String sentence) {
         return Arrays.asList(sentence.split("\\s+"));
     }
 
     private Map<String,List<WordInfo>> getListMap(List<WordInfo> words) {
         Map<String, List<WordInfo>> wordMap = new HashMap<>();
-        for (WordInfo input :  words){
-//       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
+        for (WordInfo input : words){
             if (!wordMap.containsKey(input.getWord())){
                 ArrayList arr = new ArrayList<>();
                 arr.add(input);
@@ -89,7 +64,6 @@ public class WordFrequencyGame {
                 wordMap.get(input.getWord()).add(input);
             }
         }
-
 
         return wordMap;
     }
