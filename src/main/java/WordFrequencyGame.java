@@ -48,8 +48,8 @@ public class WordFrequencyGame {
 
         List<WordInfo> words = new ArrayList<>();
         for (String word : wordsArray) {
-            WordInfo input = new WordInfo(word, 1);
-            words.add(input);
+            WordInfo wordInfo = new WordInfo(word, 1);
+            words.add(wordInfo);
         }
         return words;
     }
