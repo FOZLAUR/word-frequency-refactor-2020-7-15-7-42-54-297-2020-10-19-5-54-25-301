@@ -3,7 +3,6 @@ import java.util.*;
 public class WordFrequencyGame {
     public String getResult(String sentence){
 
-
         if (sentence.split("\\s+").length==1) {
             return sentence + " 1";
         } else {
@@ -50,23 +49,4 @@ public class WordFrequencyGame {
     private List<String> getWords(String sentence) {
         return Arrays.asList(sentence.split("\\s+"));
     }
-
-    private Map<String,List<WordInfo>> getListMap(List<WordInfo> words) {
-        Map<String, List<WordInfo>> wordMap = new HashMap<>();
-        for (WordInfo input : words){
-            if (!wordMap.containsKey(input.getWord())){
-                ArrayList arr = new ArrayList<>();
-                arr.add(input);
-                wordMap.put(input.getWord(), arr);
-            }
-
-            else {
-                wordMap.get(input.getWord()).add(input);
-            }
-        }
-
-        return wordMap;
-    }
-
-
 }
