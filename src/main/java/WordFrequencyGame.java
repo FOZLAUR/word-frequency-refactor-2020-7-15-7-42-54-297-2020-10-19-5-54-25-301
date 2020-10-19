@@ -1,8 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.util.*;
 
 public class WordFrequencyGame {
     public String getResult(String sentence){
@@ -20,7 +16,8 @@ public class WordFrequencyGame {
                 //get the map for the next step of sizing the same word
                 Map<String, List<WordInfo>> wordMap = getListMap(words);
 
-                words = getUniqueWordInfos(wordMap);
+                //words = getUniqueWordInfos(wordMap);
+                words = getUniqueWordInfos(words);
 
                 words.sort((w1, w2) -> w2.getQuantity() - w1.getQuantity());
 
@@ -34,14 +31,25 @@ public class WordFrequencyGame {
         }
     }
 
-    private List<WordInfo> getUniqueWordInfos(Map<String, List<WordInfo>> wordMap) {
-        List<WordInfo> list = new ArrayList<>();
-        for (Map.Entry<String, List<WordInfo>> entry : wordMap.entrySet()){
-            WordInfo input = new WordInfo(entry.getKey(), entry.getValue().size());
-            list.add(input);
+    private List<WordInfo> getUniqueWordInfos(List<WordInfo> words) {
+        List<WordInfo> distinctWordInfoList = new ArrayList<>();
+        HashSet<WordInfo> distinctWords = new HashSet<>(words);
+        for (WordInfo wordInfo : distinctWords){
+            WordInfo input = new WordInfo(wordInfo.getWord(),
+                    Collections.frequency(words, new WordInfo(wordInfo.getWord(),0)) );
+            distinctWordInfoList.add(input);
         }
-        return list;
+        return distinctWordInfoList;
     }
+
+//    private List<WordInfo> getUniqueWordInfos(Map<String, List<WordInfo>> wordMap) {
+//        List<WordInfo> list = new ArrayList<>();
+//        for (Map.Entry<String, List<WordInfo>> entry : wordMap.entrySet()){
+//            WordInfo input = new WordInfo(entry.getKey(), entry.getValue().size());
+//            list.add(input);
+//        }
+//        return list;
+//    }
 
     private String getConjoinedString(List<WordInfo> words) {
         StringJoiner joiner = new StringJoiner("\n");
